@@ -1,3 +1,5 @@
+import {Blob} from "buffer";
+
 type MethodChoice = 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH'
 
 /**
@@ -19,8 +21,7 @@ export class FetchOperator {
      * @param {string | undefined} [id] - id element {string | undefined}
      * @param {object | null} [form] - form {object | null}
      */
-    async run(method: MethodChoice = 'GET', id: string | undefined= '', form: object | null = null): Promise<any> {
-
+    async run(method: MethodChoice = 'GET', id: string | undefined = '', form: object | null = null): Promise<any> {
         if (method === 'DELETE' && !window.confirm(`Are you sure you want to remove ${id}?`)) {
             return null;
         }
@@ -50,6 +51,27 @@ export class FetchOperator {
         const data = res.json()
 
         return await data
+    }
+
+    async pdf(name: string): Promise<any> {
+        return await fetch(`${this.URL_API}${this.mainLink}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/pdf',
+            },
+        })
+            .then((res) => res.blob())
+            .then((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute(
+                    'download',
+                    name,
+                );
+                document.body.appendChild(link);
+                link.click();
+            })
     }
 
 }
