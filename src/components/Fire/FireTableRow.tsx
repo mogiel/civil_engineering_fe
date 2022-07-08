@@ -1,4 +1,5 @@
 import { FireProtectionInterface } from "types"
+import {Tr, Td} from "@chakra-ui/react";
 
 interface Props {
     fire: FireProtectionInterface
@@ -6,14 +7,14 @@ interface Props {
 
 export const FireTableRow = (props: Props) => {
     return <>
-        <tr>
-            <td>{props.fire.classBuilding}</td>
-            <td>{props.fire.main}</td>
-            <td>{props.fire.roof}</td>
-            <td>{props.fire.ceiling}</td>
-            <td>{props.fire.exteriorWall}</td>
-            <td>{props.fire.internalWall}</td>
-            <td>{props.fire.cover}</td>
-        </tr>
+        <Tr>
+            <Td textAlign={'center'} ><strong>{props.fire.classBuilding}</strong></Td>
+            <Td textAlign={'center'}>{props.fire.main}</Td>
+            <Td textAlign={'center'}>{props.fire.roof}</Td>
+            <Td textAlign={'center'}>{props.fire.ceiling}</Td>
+            <Td textAlign={'center'}>{props.fire.exteriorWall}</Td>
+            <Td textAlign={'center'}>{props.fire.internalWall}</Td>
+            <Td textAlign={'center'}>{props.fire.cover}</Td>
+        </Tr>
     </>
 }

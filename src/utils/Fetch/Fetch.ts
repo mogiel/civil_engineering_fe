@@ -1,5 +1,3 @@
-import {Blob} from "buffer";
-
 type MethodChoice = 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH'
 
 /**
