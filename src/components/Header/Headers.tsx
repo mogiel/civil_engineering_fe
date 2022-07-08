@@ -15,7 +15,7 @@ export const HeaderApp = () => {
 }
 
 const StyledNavLink = styled(NavLink)`
-  height: 20px;
+  height: 60px;
   display: block;
   color: white;
   text-align: center;

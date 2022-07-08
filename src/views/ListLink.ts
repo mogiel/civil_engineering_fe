@@ -1,7 +1,7 @@
 import {Links} from 'types'
 
 export const listLink: Links = {
-    fire: "Fire protection",
+    fire: "Ochrona pożarowa",
 
-    about: "About me",
+    about: "O mnie",
 }
