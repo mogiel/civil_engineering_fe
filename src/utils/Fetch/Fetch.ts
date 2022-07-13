@@ -18,6 +18,7 @@ export class FetchOperator {
      * @param {'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH'} [method] - {'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH'}
      * @param {string | undefined} [id] - id element {string | undefined}
      * @param {object | null} [form] - form {object | null}
+     * @param token - access token if exists
      */
     async run(method: MethodChoice = 'GET', id: string | undefined = '', form: object | null = null): Promise<any> {
         if (method === 'DELETE' && !window.confirm(`Are you sure you want to remove ${id}?`)) {
@@ -31,8 +32,9 @@ export class FetchOperator {
                 ...init,
                 ...{
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
+                    credentials: "include",
                     body: JSON.stringify(form),
                 }
             }
