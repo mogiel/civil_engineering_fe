@@ -1,4 +1,4 @@
-import {Button, UnorderedList, ListItem, Text} from '@chakra-ui/react'
+import {Button, UnorderedList, ListItem, Text, Link} from '@chakra-ui/react'
 import {FetchOperator} from "../utils/Fetch/Fetch";
 
 export const AboutView = () => {
@@ -34,6 +34,12 @@ export const AboutView = () => {
             <ListItem><strong>PyCamp</strong> - Python, obiektowość</ListItem>
         </UnorderedList>
         <br/>
-        <Button colorScheme={'teal'} onClick={() => downloadFile('Mateusz Mogielski CV')}>Pobierz CV</Button>
+        <Button width={'300px'} colorScheme={'teal'} onClick={() => downloadFile('Mateusz Mogielski CV')}>Pobierz CV</Button>
+        <br/>
+        <br/>
+        <Link href={"https://www.dropbox.com/s/k5ee8pebchd4ey4/Mateusz_Mogielski.pdf?dl=0"}>
+            <Button  width={'300px'} colorScheme={'teal'}>Pobierz CV - dropbox</Button>
+        </Link>
+
     </>)
 }
