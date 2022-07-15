@@ -10,7 +10,7 @@ export const UserView = () => {
     useEffect(() => {
         (
             async () => {
-                await fetch('http://localhost:3001/user/login', {
+                await fetch('https://mogiel89.smallhost.pl:3001/user/login', {
                     credentials: 'include',
                 });
             }

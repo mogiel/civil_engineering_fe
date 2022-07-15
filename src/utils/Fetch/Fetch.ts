@@ -6,7 +6,7 @@ type MethodChoice = 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH'
  */
 export class FetchOperator {
 
-    private readonly URL_API = "http://localhost:3001/"
+    private readonly URL_API = "https://mogiel89.smallhost.pl:3001/"
     private readonly mainLink: string;
 
     constructor(link: string) {
@@ -74,11 +74,3 @@ export class FetchOperator {
     }
 
 }
-
-/**
- * Przykładowe użycie dla POST:
- *
- * const data = await new FetchOperator('gift')
- * const dataRes = await data.run('POST','', form)
- *
- */
