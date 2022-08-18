@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import {FireView} from "./views/Fire";
 import {HeaderApp} from "./components/Header/Headers";
