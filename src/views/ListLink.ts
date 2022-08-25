@@ -5,7 +5,8 @@ export const listLink: Links = {
     fire: "Ochrona pożarowa",
     register: "Rejestracja",
     login: "Logowanie",
-    user:"Użytkownik",
+    user: "Użytkownik",
+    logout: "Wyloguj",
 
     about: "O mnie",
 }
