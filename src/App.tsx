@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import {FireView} from "./views/Fire";
 import {HeaderApp} from "./components/Header/Headers";
@@ -13,20 +13,36 @@ import {useSelector} from "react-redux";
 import {RootState} from "./components/store";
 
 export const App = () => {
-    const user = useSelector((state: RootState) => state.user.isLogged)
+    const isLogged = useSelector((state: RootState) => state.isLogged)
 
+    if (isLogged) {
+        return (
+            <>
+                <HeaderApp logged={isLogged}/>
+                <Container>
+                    <Routes>
+                        <Route path={"/"} element={<MainView/>}/>
+                        <Route path={"/main"} element={<MainView/>}/>
+                        <Route path={"/fire"} element={<FireView/>}/>
+                        <Route path={"/user"} element={<UserView/>}/>
+                        <Route path={"/logout"} element={<MainView/>}/>
+                        <Route path={"/login"} element={<UserView/>}/>
+                        <Route path={"/about"} element={<AboutView/>}/>
+                    </Routes>
+                </Container>
+            </>
+        );
+    }
 
     return (
         <>
-            <HeaderApp/>
+            <HeaderApp logged={isLogged}/>
             <Container>
                 <Routes>
                     <Route path={"/"} element={<MainView/>}/>
                     <Route path={"/main"} element={<MainView/>}/>
-                    <Route path={"/fire"} element={<FireView/>}/>
                     <Route path={"/register"} element={<SignupView/>}/>
                     <Route path={"/login"} element={<LoginView/>}/>
-                    <Route path={"/User"} element={<UserView/>}/>
                     <Route path={"/about"} element={<AboutView/>}/>
                 </Routes>
             </Container>

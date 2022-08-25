@@ -24,16 +24,18 @@ export class FetchOperator {
             return null;
         }
 
-        let init = {method: method}
+        let init: RequestInit = {
+            method: method,
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
 
         if (form !== null) {
             init = {
                 ...init,
                 ...{
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: "include",
                     body: JSON.stringify(form),
                 }
             }
