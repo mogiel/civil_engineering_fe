@@ -1,31 +1,39 @@
 import React, {useState} from 'react';
-import {Button, Input, InputGroup, InputRightAddon, useClipboard, Text} from "@chakra-ui/react";
+import {Input, InputGroup, InputRightAddon} from "@chakra-ui/react";
 import {FetchOperator} from "../utils/Fetch/Fetch";
 import {LoginAuth} from 'types';
-
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {setEmail, setLogged, setRole, setUsername} from "../components/features/user/user-slice";
 
 export const LoginView = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [dataJSON, setDataJSON] = useState<LoginAuth>({
-        email: '',
-        password: '',
+        email: 'a@b.c2',
+        password: 'admin123',
     })
-    // todo: skasować na produkcji oraz usunąć przekazywanie tokenów z backend
-    const [token, setToken] = useState('')
-    const { hasCopied, onCopy } = useClipboard(token)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const Send = async (e: any) => {
         e.preventDefault()
         const data = await new FetchOperator('user/login')
         const dataRes = await data.run('POST', '', dataJSON)
 
-
-        if (dataRes.token) {
-            setToken(dataRes.token)
-        } else {
-            setToken('')
+        if (dataRes.ok) {
+            const dataGetRes = await fetch('http://localhost:3001/user/login', {
+                credentials: 'include',
+            })
+                .then((res) => res.json());
+            console.log(dataGetRes)
+            dispatch(setUsername(dataGetRes.username))
+            dispatch(setEmail(dataGetRes.email))
+            dispatch(setRole(dataGetRes.position))
+            dispatch(setLogged(true))
         }
 
+        await navigate('/main')
     }
 
     const changeValue = (e: any) => {
@@ -43,6 +51,7 @@ export const LoginView = () => {
                 <Input
                     type={"email"} onChange={changeValue}
                     name={'email'}
+                    value={dataJSON.email}
                     id={'email'}
                 /><br/><br/>
                 Hasło:
@@ -51,6 +60,7 @@ export const LoginView = () => {
                         type={showPassword ? "text" : "password"}
                         onChange={changeValue}
                         name={'password'}
+                        value={dataJSON.password}
                         id={'password'}
                     />
                     <InputRightAddon
@@ -70,7 +80,6 @@ export const LoginView = () => {
                         background: "teal.500"
                     }}/>
             </form>
-            {token ? <><Text>Twój token:<br/>{token}</Text><Button onClick={onCopy} value={token}>Pobierz token</Button></> : null}
         </>
     );
 }

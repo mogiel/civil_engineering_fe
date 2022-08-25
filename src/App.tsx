@@ -9,8 +9,13 @@ import {SignupView} from "./views/SingUp";
 import {MainView} from './views/MainView';
 import {LoginView} from './views/Login';
 import {UserView} from './views/UserView';
+import {useSelector} from "react-redux";
+import {RootState} from "./components/store";
 
 export const App = () => {
+    const user = useSelector((state: RootState) => state.user.isLogged)
+
+
     return (
         <>
             <HeaderApp/>
@@ -22,7 +27,6 @@ export const App = () => {
                     <Route path={"/register"} element={<SignupView/>}/>
                     <Route path={"/login"} element={<LoginView/>}/>
                     <Route path={"/User"} element={<UserView/>}/>
-
                     <Route path={"/about"} element={<AboutView/>}/>
                 </Routes>
             </Container>
