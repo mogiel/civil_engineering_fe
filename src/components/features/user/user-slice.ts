@@ -1,13 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-interface UserState {
+export interface UserState {
     username: string;
     email: string;
     role: string;
     isLogged: boolean
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
     email: "",
     username: "",
     role: "",
@@ -50,3 +50,5 @@ export const userSlice = createSlice({
 })
 
 export const {setUsername, setRole, setEmail, setLogged} = userSlice.actions
+
+export default userSlice.reducer;

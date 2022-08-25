@@ -5,18 +5,17 @@ import {RootState} from "../components/store";
 
 export const UserView = () => {
     const [content, setContent] = useState<UserReturn | null>(null);
-    const {isLogged, email, role, username} = useSelector((state: RootState) => state.user)
+    const {isLogged, email, role, username} = useSelector((state: RootState) => state)
     console.log(isLogged, email, role, username)
 
 
     useEffect(() => {
         (
             async () => {
-                const data = await fetch('http://localhost:3001/user/login', {
+                const data = await fetch('http://localhost:3001/user/info', {
                     credentials: 'include',
                 })
                     .then((res) => res.json());
-                console.log(data)
 
                 if (data) {
                     setContent(data)

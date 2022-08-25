@@ -26,14 +26,13 @@ export const LoginView = () => {
                 credentials: 'include',
             })
                 .then((res) => res.json());
-            console.log(dataGetRes)
             dispatch(setUsername(dataGetRes.username))
             dispatch(setEmail(dataGetRes.email))
             dispatch(setRole(dataGetRes.position))
             dispatch(setLogged(true))
         }
 
-        await navigate('/main')
+
     }
 
     const changeValue = (e: any) => {

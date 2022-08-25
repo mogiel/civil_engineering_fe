@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import {FetchOperator} from "../utils/Fetch/Fetch";
 import {FireProtectionInterface} from 'types'
 import {FireTable} from "../components/Fire/FireTable";
 import {
@@ -20,8 +19,11 @@ export const FireView = () => {
 
     useEffect(() => {
         (async () => {
-            const data = await new FetchOperator('fire')
-            const dataRes = await data.run('GET')
+            const dataRes = await fetch('http://localhost:3001/fire', {
+                credentials: 'include',
+            })
+                .then((res) => res.json());
+
             setFireInfo(dataRes)
         })()
     }, [])
