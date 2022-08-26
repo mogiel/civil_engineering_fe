@@ -36,7 +36,7 @@ export const MenuLogged = () => {
             </MenuGroup>
             <MenuDivider/>
             <MenuGroup title='Help'>
-                <MenuItem>Docs</MenuItem>
+                <MenuItem onClick={() => navigate('/about')}>O autorze</MenuItem>
                 <MenuItem onClick={Logout}>Wyloguj</MenuItem>
             </MenuGroup>
         </MenuList>
