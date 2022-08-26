@@ -31,7 +31,7 @@ export const MenuLogged = () => {
     return <>
         <MenuList>
             <MenuGroup title='Profile'>
-                <MenuItem>My Account</MenuItem>
+                <MenuItem onClick={() => navigate('/user')}>Moje konto</MenuItem>
                 <MenuItem>Payments </MenuItem>
             </MenuGroup>
             <MenuDivider/>
