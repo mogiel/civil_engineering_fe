@@ -7,6 +7,7 @@ export const listLink: Links = {
     login: "Logowanie",
     user: "Użytkownik",
     logout: "Wyloguj",
+    subscription: "Subskrypcje",
 
     about: "O mnie",
 }
