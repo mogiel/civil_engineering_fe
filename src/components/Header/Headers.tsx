@@ -15,7 +15,7 @@ const isLoggedArray = ["main", "fire"]
 const notLoggedArray = ["main", "register", "login", "about"]
 
 export const HeaderApp = (props: Props) => {
-    const {username} = useSelector((state: RootState) => state)
+    const {username} = useSelector((state: RootState) => state.user)
 
     const listLinkNav = Object.entries(listLink)
         .filter(([key, value]) => props.logged ? isLoggedArray.includes(key) : notLoggedArray.includes(key))

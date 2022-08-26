@@ -11,9 +11,10 @@ import {LoginView} from './views/Login';
 import {UserView} from './views/UserView';
 import {useSelector} from "react-redux";
 import {RootState} from "./components/store";
+import {SubscriptionView} from "./views/SubscriptionView";
 
 export const App = () => {
-    const isLogged = useSelector((state: RootState) => state.isLogged)
+    const {isLogged, role} = useSelector((state: RootState) => state.user)
 
     if (isLogged) {
         return (
@@ -25,6 +26,7 @@ export const App = () => {
                         <Route path={"/main"} element={<MainView/>}/>
                         <Route path={"/fire"} element={<FireView/>}/>
                         <Route path={"/user"} element={<UserView/>}/>
+                        <Route path={"/subscription"} element={<SubscriptionView/>}/>
                         <Route path={"/logout"} element={<MainView/>}/>
                         <Route path={"/login"} element={<UserView/>}/>
                         <Route path={"/about"} element={<AboutView/>}/>

@@ -28,15 +28,29 @@ export const MenuLogged = () => {
         await navigate('/main')
     }
 
+    const Delete = async (e: any) => {
+        e.preventDefault()
+        const data = await new FetchOperator('user')
+        const dataRes = await data.run('DELETE')
+
+        if (dataRes) {
+            dispatch(setUsername(""))
+            dispatch(setEmail(""))
+            dispatch(setRole(""))
+            dispatch(setLogged(false))
+        }
+    }
+
     return <>
         <MenuList>
             <MenuGroup title='Profile'>
                 <MenuItem onClick={() => navigate('/user')}>Moje konto</MenuItem>
-                <MenuItem>Payments </MenuItem>
+                <MenuItem onClick={() => navigate('/subscription')}>Subskrypcja</MenuItem>
             </MenuGroup>
             <MenuDivider/>
             <MenuGroup title='Help'>
                 <MenuItem onClick={() => navigate('/about')}>O autorze</MenuItem>
+                <MenuItem onClick={Delete}>Usuń konto</MenuItem>
                 <MenuItem onClick={Logout}>Wyloguj</MenuItem>
             </MenuGroup>
         </MenuList>

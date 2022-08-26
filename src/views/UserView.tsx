@@ -5,9 +5,7 @@ import {RootState} from "../components/store";
 
 export const UserView = () => {
     const [content, setContent] = useState<UserReturn | null>(null);
-    const {isLogged, email, role, username} = useSelector((state: RootState) => state)
-    console.log(isLogged, email, role, username)
-
+    const {isLogged, email, role, username} = useSelector((state: RootState) => state.user)
 
     useEffect(() => {
         (
