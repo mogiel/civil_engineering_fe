@@ -13,6 +13,8 @@ import {useSelector} from "react-redux";
 import {RootState} from "./components/store";
 import {SubscriptionView} from "./views/SubscriptionView";
 import {BankSite} from "./views/BankSite";
+import { sitePosition } from 'types';
+import {SubUserView} from "./views/SubUserView";
 
 export const App = () => {
     const {isLogged, role} = useSelector((state: RootState) => state.user)
@@ -32,6 +34,7 @@ export const App = () => {
                         <Route path={"/logout"} element={<MainView/>}/>
                         <Route path={"/login"} element={<UserView/>}/>
                         <Route path={"/about"} element={<AboutView/>}/>
+                        {role === sitePosition.USER_SUB && <Route path={"/sub-user"} element={<SubUserView/>}/>}
                     </Routes>
                 </Container>
             </>
