@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {UserReturn} from 'types';
 import {useSelector} from "react-redux";
 import {RootState} from "../components/store";
+import {FetchOperator} from "../utils/Fetch/Fetch";
 
 export const UserView = () => {
     const [content, setContent] = useState<UserReturn | null>(null);
@@ -10,13 +11,11 @@ export const UserView = () => {
     useEffect(() => {
         (
             async () => {
-                const data = await fetch('http://localhost:3001/user/info', {
-                    credentials: 'include',
-                })
-                    .then((res) => res.json());
+                const data = await new FetchOperator('user/info')
+                const dataRes = await data.run('GET')
 
-                if (data) {
-                    setContent(data)
+                if (dataRes) {
+                    setContent(dataRes)
                 } else {
                     setContent(null)
                 }
