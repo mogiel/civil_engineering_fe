@@ -12,5 +12,5 @@ const zeroFirst = (value: number): string => {
 
 export const Datetime = (props:Props) => {
     const date = new Date(props.time)
-    return <>{zeroFirst(date.getDay())}.{zeroFirst(date.getMonth())}.{date.getFullYear()} {zeroFirst(date.getHours())}:{zeroFirst(date.getMinutes())}</>
+    return <>{zeroFirst(date.getDate())}.{zeroFirst(date.getMonth() + 1)}.{date.getFullYear()} {zeroFirst(date.getHours())}:{zeroFirst(date.getMinutes())}</>
 }
