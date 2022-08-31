@@ -4,6 +4,7 @@ import {
     MenuItem,
     MenuGroup,
     MenuDivider,
+    useColorMode,
 } from '@chakra-ui/react'
 import {FetchOperator} from "../../utils/Fetch/Fetch";
 import {setEmail, setLogged, setRole, setUsername} from "../features/user/user-slice";
@@ -13,6 +14,7 @@ import {useNavigate} from "react-router-dom";
 export const MenuLogged = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const { colorMode, toggleColorMode } = useColorMode()
 
     const Logout = async (e: any) => {
         e.preventDefault()
@@ -47,6 +49,7 @@ export const MenuLogged = () => {
                 <MenuItem onClick={() => navigate('/user')}>Moje konto</MenuItem>
                 <MenuItem onClick={() => navigate('/subscription')}>Subskrypcja</MenuItem>
                 <MenuItem onClick={() => navigate('/bank?id=asd&price=321')}>Bank</MenuItem>
+                <MenuItem onClick={toggleColorMode}>Wygląd: {colorMode === 'light' ? 'ciemny' : 'jasny'}</MenuItem>
             </MenuGroup>
             <MenuDivider/>
             <MenuGroup title='Help'>
