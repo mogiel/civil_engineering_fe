@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "types": [
-        "../civil_engineering_be/civil-engineering/src/types"
+        "../civil_engineering_be/civil-engineering/src/types",
       ]
     }
   }
