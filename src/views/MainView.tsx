@@ -17,11 +17,6 @@ export const MainView = () => {
             <Text>Całość kodu dostępna na platformie github:</Text>
             <Link color={"teal.500"} href={'https://github.com/mogiel/civil_engineering_be'}>Kod Backend</Link><br/>
             <Link color={"teal.500"} href={'https://github.com/mogiel/civil_engineering_fe'}>Kod Frontend</Link>
-            <br/><br/>
-            Niestety nie udało mi się poprawnie zaimplementować logowania przy wymianie miedzy backendem a frontendem.
-            Backend działa podczas sprawdzeń programem "postman". Ale pozostawiłem te funkcjonalność, ponieważ spędziłem
-            nad tym zagadnieniem pare dni. Logowanie działa na zasadzie przekazania i wyświetleniu tokenu na
-            stronie(Niebezpieczne zachowanie) i wklejenie do w zakładce
         </>
     )
 }
