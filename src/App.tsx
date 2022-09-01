@@ -1,23 +1,51 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {FireView} from "./views/Fire";
 import {HeaderApp} from "./components/Header/Headers";
 import styled from "styled-components";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import {AboutView} from "./views/About";
 import {SignupView} from "./views/SingUp";
 import {MainView} from './views/MainView';
 import {LoginView} from './views/Login';
 import {UserView} from './views/UserView';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./components/store";
 import {SubscriptionView} from "./views/SubscriptionView";
 import {BankSite} from "./views/BankSite";
-import { sitePosition } from 'types';
+import {sitePosition, UserReturn} from 'types';
 import {SubUserView} from "./views/SubUserView";
+import {FetchOperator} from "./utils/Fetch/Fetch";
+import {setEmail, setLogged, setRole, setUsername} from "./components/features/user/user-slice";
 
 export const App = () => {
     const {isLogged, role} = useSelector((state: RootState) => state.user)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        (
+            async () => {
+                const data = await new FetchOperator('user/info')
+                const dataRes: UserReturn = await data.run('GET')
+
+                if (dataRes.username) {
+                    dispatch(setUsername(dataRes.username))
+                    dispatch(setEmail(dataRes.email))
+                    dispatch(setRole(dataRes.position))
+                    dispatch(setLogged(true))
+                } else {
+                    dispatch(setUsername(""))
+                    dispatch(setEmail(""))
+                    dispatch(setRole(""))
+                    dispatch(setLogged(false))
+
+                    navigate('/main')
+                }
+            }
+        )();
+    }, []);
 
     if (isLogged) {
         return (
@@ -34,7 +62,12 @@ export const App = () => {
                         <Route path={"/logout"} element={<MainView/>}/>
                         <Route path={"/login"} element={<UserView/>}/>
                         <Route path={"/about"} element={<AboutView/>}/>
-                        {role === sitePosition.USER_SUB && <Route path={"/sub-user"} element={<SubUserView/>}/>}
+
+                        if (role === sitePosition.USER_SUB) {
+                            <Route path={"/sub-user"} element={<SubUserView/>}/>
+                        //Lista pozostałych stron dla użytkowników z subskrypcją
+                        }
+
                     </Routes>
                 </Container>
             </>
