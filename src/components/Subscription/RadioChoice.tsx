@@ -4,12 +4,13 @@ import { GetAll } from "types";
 
 interface Props {
     content: GetAll[]
+    days: number
     onChange: (value: number) => void
 }
 
 export const RadioChoice = (props:Props) => {
-    const [content, setContent] = useState(props.content)
-    const [value, setValue] = useState(30)
+    const content = props.content
+    const [value, setValue] = useState(props.days)
 
     const handleChange = (e: any) => {
         setValue(Number(e.target.value));
@@ -18,7 +19,7 @@ export const RadioChoice = (props:Props) => {
 
     return <RadioGroup value={value}>
         <Stack>
-            {content.map(test => <Radio onChange={handleChange} value={test.days}>dni: {test.days}, koszt: {test.price} zł</Radio>)}
+            {content.map(test => <Radio key={test.id} onChange={handleChange} value={test.days}>dni: {test.days}, koszt: {test.price} zł</Radio>)}
         </Stack>
     </RadioGroup>
 }
