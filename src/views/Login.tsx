@@ -3,7 +3,6 @@ import {Input, InputGroup, InputRightAddon} from "@chakra-ui/react";
 import {FetchOperator} from "../utils/Fetch/Fetch";
 import {LoginAuth} from 'types';
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
 import {setEmail, setLogged, setRole, setUsername} from "../components/features/user/user-slice";
 
 export const LoginView = () => {
@@ -14,7 +13,7 @@ export const LoginView = () => {
     })
 
     const dispatch = useDispatch()
-    const navigate = useNavigate();
+
 
     const Send = async (e: any) => {
         e.preventDefault()
