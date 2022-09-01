@@ -3,10 +3,13 @@ import {FetchOperator} from "../../utils/Fetch/Fetch";
 import {GetAll} from 'types'
 import {CircularProgress, FormControl, FormLabel, Input, Radio, RadioGroup, Stack} from "@chakra-ui/react";
 import {RadioChoice} from "./RadioChoice";
+import {createSearchParams, useNavigate} from "react-router-dom";
 
 export const SubChecks = () => {
     const [content, setContent] = useState<GetAll[] | null>()
-    const [dateSend, setDateSend] = useState<number | null>(null)
+    const [dateSend, setDateSend] = useState<number>(60)
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         (
@@ -19,6 +22,7 @@ export const SubChecks = () => {
                 } else {
                     setContent(null)
                 }
+
             }
 
         )();
@@ -27,7 +31,20 @@ export const SubChecks = () => {
     const Send = async (e: any) => {
         e.preventDefault()
         const data = await new FetchOperator('subs/buy')
-        await data.run('POST', '', {date: dateSend})
+        const dataRes = await data.run('POST', '', {date: dateSend})
+
+        if (dataRes) {
+            navigate({
+                pathname: "/bank",
+                search: createSearchParams({
+                    id: dataRes.id,
+                    price: dataRes.price
+                }).toString()
+            })
+
+        }
+
+
     }
 
     if (!content) {
@@ -41,7 +58,7 @@ export const SubChecks = () => {
     return <>
         <FormControl>
             <FormLabel>
-                <RadioChoice content={content} onChange={handleChange}/>
+                <RadioChoice content={content} onChange={handleChange} days={dateSend}/>
                 <Input
                     type={"submit"}
                     backgroundColor={"teal"}

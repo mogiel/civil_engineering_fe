@@ -48,7 +48,6 @@ export const MenuLogged = () => {
             <MenuGroup title='Profile'>
                 <MenuItem onClick={() => navigate('/user')}>Moje konto</MenuItem>
                 <MenuItem onClick={() => navigate('/subscription')}>Subskrypcja</MenuItem>
-                <MenuItem onClick={() => navigate('/bank?id=asd&price=321')}>Bank</MenuItem>
                 <MenuItem onClick={toggleColorMode}>Wygląd: {colorMode === 'light' ? 'ciemny' : 'jasny'}</MenuItem>
             </MenuGroup>
             <MenuDivider/>
