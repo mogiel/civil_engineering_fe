@@ -12,8 +12,7 @@ export const BankSite = () => {
 
     const Send = async (e: any) => {
         e.preventDefault()
-        const data = await new FetchOperator('subs')
-        const dataRes = await data.run('POST', '', {data: id})
+        await new FetchOperator('subs').run('POST', '', {id, price})
 
         navigate("/main")
     }
