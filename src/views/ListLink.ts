@@ -8,6 +8,7 @@ export const listLink: Links = {
     user: "Użytkownik",
     logout: "Wyloguj",
     subscription: "Subskrypcje",
+    sub_user: "Zawartość premium",
 
     about: "O mnie",
 }

@@ -7,7 +7,7 @@ import {SubChecks} from "../components/Subscription/Sub";
 const SUB_LAST_DAY = 14
 
 const dateCheck = (subs_term:Date, days: number = SUB_LAST_DAY): boolean => {
-    if (subs_term === null) return false
+    if (subs_term === null) return true
     const dateNow = new Date()
     const dateSub = new Date(subs_term)
     dateNow.setDate(dateNow.getDate() + days)
@@ -41,5 +41,5 @@ export const SubscriptionView = () => {
         </>
     }
 
-    return <h2>Wykup subskrypcje</h2>
+    return <h2>Błąd strony, spróbuj za pare minut</h2>
 }

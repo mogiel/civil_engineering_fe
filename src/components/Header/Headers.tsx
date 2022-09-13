@@ -6,19 +6,32 @@ import {Menu, MenuButton} from "@chakra-ui/react";
 import {useSelector} from "react-redux";
 import {RootState} from "../store";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import {useEffect, useState} from "react";
+import {FetchOperator} from "../../utils/Fetch/Fetch";
 
 interface Props {
     logged: boolean
 }
 
-const isLoggedArray = ["main", "fire"]
 const notLoggedArray = ["main", "register", "login", "about"]
 
 export const HeaderApp = (props: Props) => {
-    const {username} = useSelector((state: RootState) => state.user)
+    const {username, role} = useSelector((state: RootState) => state.user)
+    const [arraySite, setArraySite] = useState<string[]>(notLoggedArray)
+
+    useEffect(() => {
+        (async () => {
+            const data = await new FetchOperator('user/info-site').run('GET')
+            if (data.statusCode !== 403) {
+                setArraySite(data)
+            } else {
+                setArraySite(notLoggedArray)
+            }
+        })()
+    }, [role])
 
     const listLinkNav = Object.entries(listLink)
-        .filter(([key, value]) => props.logged ? isLoggedArray.includes(key) : notLoggedArray.includes(key))
+        .filter(([key, value]) => arraySite.includes(key))
         .map(([key, value]) => {
             return (<Item><StyledNavLink to={`/${key}`} key={key}>{value}</StyledNavLink></Item>)
         })
