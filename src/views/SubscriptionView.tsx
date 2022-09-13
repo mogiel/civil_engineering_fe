@@ -7,11 +7,11 @@ import {SubChecks} from "../components/Subscription/Sub";
 const SUB_LAST_DAY = 14
 
 const dateCheck = (subs_term:Date, days: number = SUB_LAST_DAY): boolean => {
-    if (subs_term === null) return true
+    if (subs_term === null) return false
     const dateNow = new Date()
     const dateSub = new Date(subs_term)
     dateNow.setDate(dateNow.getDate() + days)
-    return dateNow <= dateSub;
+    return dateNow > dateSub;
 }
 
 
