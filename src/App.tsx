@@ -13,13 +13,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./components/store";
 import {SubscriptionView} from "./views/SubscriptionView";
 import {BankSite} from "./views/BankSite";
-import {sitePosition, UserReturn} from 'types';
+import {UserReturn} from 'types';
 import {SubUserView} from "./views/SubUserView";
 import {FetchOperator} from "./utils/Fetch/Fetch";
 import {setEmail, setLogged, setRole, setUsername} from "./components/features/user/user-slice";
 
 export const App = () => {
-    const {isLogged, role} = useSelector((state: RootState) => state.user)
+    const {isLogged} = useSelector((state: RootState) => state.user)
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ export const App = () => {
                     dispatch(setRole(""))
                     dispatch(setLogged(false))
 
-                    navigate('/main')
+                    await navigate('/main')
                 }
             }
         )();
@@ -64,8 +64,7 @@ export const App = () => {
                         <Route path={"/about"} element={<AboutView/>}/>
 
                         if (role === sitePosition.USER_SUB) {
-                            <Route path={"/sub-user"} element={<SubUserView/>}/>
-                        //Lista pozostałych stron dla użytkowników z subskrypcją
+                            <Route path={"/sub_user"} element={<SubUserView/>}/>
                         }
 
                     </Routes>

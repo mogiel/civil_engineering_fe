@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Input, InputGroup, InputRightAddon} from "@chakra-ui/react";
 import {FetchOperator} from "../utils/Fetch/Fetch";
 import {CreateAuth} from 'types';
+import {useNavigate} from "react-router-dom";
 
 
 export const SignupView = () => {
@@ -12,12 +13,15 @@ export const SignupView = () => {
         password: '',
     })
     const [res, setRes] = useState(null)
+    const navigate = useNavigate();
 
     const Send = async (e: any) => {
         e.preventDefault()
         const data = await new FetchOperator('register')
         const dataRes = await data.run('POST', '', dataJSON)
         setRes(dataRes)
+
+        await navigate("/login")
     }
 
     const changeValue = (e: any) => {
